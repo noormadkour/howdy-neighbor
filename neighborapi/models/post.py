@@ -14,5 +14,5 @@ class Post(models.Model):
     image = models.ImageField(upload_to='post_images/', blank=True, null=True)
     content = models.CharField(max_length=200)
     approved = models.BooleanField()
-    categories = models.ManyToManyField("Category", through="PostCategory", related_name="posts")
     accept_rsvp = models.BooleanField(default=False)
+    categories = models.ManyToManyField("Category", through="PostCategory", related_name="posts")
