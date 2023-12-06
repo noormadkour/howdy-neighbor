@@ -23,20 +23,20 @@ class SimplePostSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    neighbor = NeighborSerializer(many=False)
+    author = NeighborSerializer(many=False)
     is_owner = serializers.SerializerMethodField()
     categories = CategorySerializer(many=True)
     post_type = PostTypeSerializer(many=False)
 
     def get_is_owner(self, obj):
         # Check if the authenticated user is the owner
-        return self.context["request"].user == obj.neighbor.user
+        return self.context["request"].user == obj.author.user
 
     class Meta:
         model = Post
         fields = [
             "id",
-            "neighbor",
+            "author",
             "post_type",
             "title",
             "publication_date",
@@ -65,7 +65,7 @@ class PostViewSet(viewsets.ViewSet):
 
     def create(self, request):
         # Get the data from the client's JSON payload
-        neighbor = Neighbor.objects.get(user=request.auth.user)
+        author = Neighbor.objects.get(user=request.auth.user)
         post_type = PostType.objects.get(pk=request.data["post_type"])
         title = request.data.get("title")
         publication_date = request.data.get("publication_date")
@@ -79,7 +79,7 @@ class PostViewSet(viewsets.ViewSet):
         # primary key to work with
         post = Post.objects.create(
             # maybe issues with rare_user /  request.user
-            neighbor=neighbor,
+            author=author,
             post_type=post_type,
             title=title,
             publication_date=publication_date,
@@ -87,11 +87,12 @@ class PostViewSet(viewsets.ViewSet):
             image_url=image_url,
             content=content,
             approved=approved,
+            accept_rsvp=accept_rsvp
         )
 
         # Establish the many-to-many relationships
-        tag_ids = request.data.get("tags", [])
-        post.tags.set(tag_ids)
+        category_ids = request.data.get("categories", [])
+        post.tags.set(category_ids)
 
         serializer = PostSerializer(post, context={"request": request})
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -105,17 +106,15 @@ class PostViewSet(viewsets.ViewSet):
 
             serializer = SimplePostSerializer(data=request.data)
             if serializer.is_valid():
-                # post.rare_user = serializer.validated_data["rare_user"]
                 post.post_type = serializer.validated_data["post_type"]
                 post.title = serializer.validated_data["title"]
-                # post.publication_date = serializer.validated_data["publication_date"]
                 post.image_url = serializer.validated_data["image_url"]
                 post.content = serializer.validated_data["content"]
                 post.approved = serializer.validated_data["approved"]
                 post.save()
 
-                tag_ids = request.data.get("tags", [])
-                post.tags.set(tag_ids)
+                category_ids = request.data.get("categories", [])
+                post.tags.set(category_ids)
 
                 serializer = PostSerializer(post, context={"request": request})
                 return Response(None, status.HTTP_204_NO_CONTENT)
