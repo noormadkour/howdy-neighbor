@@ -9,11 +9,6 @@ from .postTypes import PostTypeSerializer
 
 
 class SimplePostSerializer(serializers.ModelSerializer):
-    # is_owner = serializers.SerializerMethodField()
-
-    # def get_is_owner(self, obj):
-    #     # Check if the authenticated user is the owner
-    #     return self.context["request"].user == obj.rare_user.user
 
     class Meta:
         model = Post
@@ -24,7 +19,6 @@ class SimplePostSerializer(serializers.ModelSerializer):
             "content",
             "approved",
             "categories",
-            # "is_owner",
         ]
 
 
@@ -32,7 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
     neighbor = NeighborSerializer(many=False)
     is_owner = serializers.SerializerMethodField()
     categories = CategorySerializer(many=True)
-    post_types = PostTypeSerializer(many=False)
+    post_type = PostTypeSerializer(many=False)
 
     def get_is_owner(self, obj):
         # Check if the authenticated user is the owner
@@ -72,12 +66,14 @@ class PostViewSet(viewsets.ViewSet):
     def create(self, request):
         # Get the data from the client's JSON payload
         neighbor = Neighbor.objects.get(user=request.auth.user)
-        post_type = PostType.objects.get(pk=request.data["type"])
+        post_type = PostType.objects.get(pk=request.data["post_type"])
         title = request.data.get("title")
         publication_date = request.data.get("publication_date")
+        event_date = request.dat.get("event_date")
         image_url = request.data.get("image_url")
         content = request.data.get("content")
         approved = request.data.get("approved")
+        accept_rsvp = request.data.get("accept_rsvp")
 
         # Create a post database row first, so you have a
         # primary key to work with
@@ -87,6 +83,7 @@ class PostViewSet(viewsets.ViewSet):
             post_type=post_type,
             title=title,
             publication_date=publication_date,
+            event_date=event_date,
             image_url=image_url,
             content=content,
             approved=approved,
@@ -109,7 +106,7 @@ class PostViewSet(viewsets.ViewSet):
             serializer = SimplePostSerializer(data=request.data)
             if serializer.is_valid():
                 # post.rare_user = serializer.validated_data["rare_user"]
-                post.category = serializer.validated_data["category"]
+                post.post_type = serializer.validated_data["post_type"]
                 post.title = serializer.validated_data["title"]
                 # post.publication_date = serializer.validated_data["publication_date"]
                 post.image_url = serializer.validated_data["image_url"]

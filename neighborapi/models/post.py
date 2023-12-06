@@ -11,7 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     publication_date = models.DateField(auto_now_add=True)
     event_date = models.DateField(validators=[MinValueValidator(limit_value=timezone.now().date())], blank=True, null=True)
-    image = models.URLField(blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)
     content = models.CharField(max_length=200)
     approved = models.BooleanField()
     accept_rsvp = models.BooleanField(default=False)
