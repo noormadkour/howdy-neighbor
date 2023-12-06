@@ -7,7 +7,7 @@ class Neighbor(models.Model):
 
     address = models.CharField(max_length=200)
     bio = models.CharField(max_length=200)
-    profile_image = models.ImageField(upload_to='neighbor_images/', blank=True)
+    profile_image = models.URLField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="neighbors")
