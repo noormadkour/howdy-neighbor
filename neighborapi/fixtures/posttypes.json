@@ -1,0 +1,73 @@
+[
+    {
+      "model": "neighborapi.posttype",
+      "pk": 1,
+      "fields": {
+        "type": "Requests"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 2,
+      "fields": {
+        "type": "Lost and Found"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 3,
+      "fields": {
+        "type": "Events"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 4,
+      "fields": {
+        "type": "Recommendations"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 5,
+      "fields": {
+        "type": "Neighborhood News"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 6,
+      "fields": {
+        "type": "Local Businesses"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 7,
+      "fields": {
+        "type": "Community Announcements"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 8,
+      "fields": {
+        "type": "Safety Alerts"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 9,
+      "fields": {
+        "type": "For Sale/Wanted"
+      }
+    },
+    {
+      "model": "neighborapi.posttype",
+      "pk": 10,
+      "fields": {
+        "type": "Volunteer Opportunities"
+      }
+    }
+  ]
+  

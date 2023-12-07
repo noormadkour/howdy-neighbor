@@ -1,0 +1,53 @@
+[
+    {
+      "model": "neighborapi.comment",
+      "pk": 1,
+      "fields": {
+        "neighbor": 1,
+        "post": 1,
+        "content": "Sounds like a great event! Count me in.",
+        "created_on": "2023-12-08"
+      }
+    },
+    {
+      "model": "neighborapi.comment",
+      "pk": 2,
+      "fields": {
+        "neighbor": 2,
+        "post": 1,
+        "content": "Looking forward to it!",
+        "created_on": "2023-12-10"
+      }
+    },
+    {
+      "model": "neighborapi.comment",
+      "pk": 3,
+      "fields": {
+        "neighbor": 1,
+        "post": 2,
+        "content": "Happy birthday! Can't wait to celebrate with you.",
+        "created_on": "2023-12-20"
+      }
+    },
+    {
+      "model": "neighborapi.comment",
+      "pk": 4,
+      "fields": {
+        "neighbor": 2,
+        "post": 3,
+        "content": "Thanks for the restaurant recommendations!",
+        "created_on": "2023-12-12"
+      }
+    },
+    {
+      "model": "neighborapi.comment",
+      "pk": 5,
+      "fields": {
+        "neighbor": 2,
+        "post": 4,
+        "content": "The handyman did a fantastic job!",
+        "created_on": "2023-12-15"
+      }
+    }
+  ]
+  

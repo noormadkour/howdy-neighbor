@@ -7,7 +7,7 @@ from neighborapi.models import PostType
 class PostTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostType
-        fields = ["id", "label"]
+        fields = ["id", "type"]
 
 
 class PostTypeViewSet(viewsets.ViewSet):
@@ -26,13 +26,13 @@ class PostTypeViewSet(viewsets.ViewSet):
 
     def create(self, request):
         # Get the data from the client's JSON payload
-        label = request.data.get("label")
+        type = request.data.get("type")
 
         # Create a comment database row first, so you have a
         # primary key to work with
         post_type = PostType.objects.create(
             # maybe issues with label /  request.user
-            label=label
+            type=type
         )
 
         serializer = PostTypeSerializer(post_type, context={"request": request})

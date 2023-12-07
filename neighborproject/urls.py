@@ -3,12 +3,13 @@ from django.urls import include, path
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
-from neighborapi.views import UserViewSet, PostTypeViewSet, PostViewSet, CategoryViewSet
+from neighborapi.views import UserViewSet, PostTypeViewSet, PostViewSet, CategoryViewSet, CommentViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"posts", PostViewSet, "post")
 router.register(r"categories", CategoryViewSet, "category")
 router.register(r"posttypes", PostTypeViewSet, "posttype")
+router.register(r"comments", CommentViewSet, "comment")
 
 
 

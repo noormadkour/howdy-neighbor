@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .categories import CategorySerializer
 from .users import NeighborSerializer
 from .postTypes import PostTypeSerializer
+from .comments import SimpleCommentSerializer
 
 
 class SimplePostSerializer(serializers.ModelSerializer):
@@ -27,10 +28,15 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     categories = CategorySerializer(many=True)
     post_type = PostTypeSerializer(many=False)
+    comments = SimpleCommentSerializer(many=True, read_only=True)
 
     def get_is_owner(self, obj):
         # Check if the authenticated user is the owner
-        return self.context["request"].user == obj.author.user
+        # return self.context["request"].user == obj.author.user
+        request = self.context.get("request")
+        if request:
+            return request.user == obj.author.user
+        return False
 
     class Meta:
         model = Post
@@ -45,6 +51,7 @@ class PostSerializer(serializers.ModelSerializer):
             "approved",
             "categories",
             "is_owner",
+            "comments"
         ]
 
 
