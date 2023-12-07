@@ -1,0 +1,79 @@
+[
+    {
+      "model": "neighborapi.post",
+      "pk": 1,
+      "fields": {
+        "author": 1,
+        "post_type": 1,
+        "title": "Neighbor Gathering",
+        "publication_date": "2023-12-07",
+        "event_date": "2023-12-15",
+        "image_url": "https://example.com/image1.jpg",
+        "content": "Join us for a neighborhood gathering!",
+        "approved": true,
+        "accept_rsvp": true,
+        "categories": [4, 7] 
+      }
+    },
+    {
+      "model": "neighborapi.post",
+      "pk": 2,
+      "fields": {
+        "author": 2,
+        "post_type": 1,
+        "title": "Birthday Party",
+        "publication_date": "2023-12-08",
+        "event_date": "2023-12-20",
+        "image_url": "https://example.com/image2.jpg",
+        "content": "Celebrating a special birthday!",
+        "approved": true,
+        "accept_rsvp": true,
+        "categories": [1, 8] 
+      }
+    },
+    {
+      "model": "neighborapi.post",
+      "pk": 3,
+      "fields": {
+        "author": 1,
+        "post_type": 2,
+        "title": "Recommendation: Local Eateries",
+        "publication_date": "2023-12-10",
+        "image_url": "https://example.com/image3.jpg",
+        "content": "Discover the best local eateries in town!",
+        "approved": true,
+        "categories": [5, 8] 
+      }
+    },
+    {
+      "model": "neighborapi.post",
+      "pk": 4,
+      "fields": {
+        "author": 2,
+        "post_type": 2,
+        "title": "Handyman Recommendation",
+        "publication_date": "2023-12-12",
+        "image_url": "https://example.com/image4.jpg",
+        "content": "Highly recommended handyman for home repairs!",
+        "approved": true,
+        "categories": [6, 9] 
+      }
+    },
+    {
+      "model": "neighborapi.post",
+      "pk": 5,
+      "fields": {
+        "author": 1,
+        "post_type": 1,
+        "title": "Community BBQ",
+        "publication_date": "2023-12-15",
+        "event_date": "2023-12-25",
+        "image_url": "https://example.com/image5.jpg",
+        "content": "Join us for a festive community BBQ!",
+        "approved": true,
+        "accept_rsvp": true,
+        "categories": [2, 7] 
+      }
+    }
+  ]
+  

@@ -1,0 +1,72 @@
+[
+    {
+      "model": "neighborapi.category",
+      "pk": 1,
+      "fields": {
+        "label": "Birthday Celebration"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 2,
+      "fields": {
+        "label": "BBQ Party"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 3,
+      "fields": {
+        "label": "Parent Get-Together"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 4,
+      "fields": {
+        "label": "Community Events"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 5,
+      "fields": {
+        "label": "Recommended Foods"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 6,
+      "fields": {
+        "label": "Yard Services"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 7,
+      "fields": {
+        "label": "Handyman Services"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 8,
+      "fields": {
+        "label": "Local Eateries"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 9,
+      "fields": {
+        "label": "Home Improvement Tips"
+      }
+    },
+    {
+      "model": "neighborapi.category",
+      "pk": 10,
+      "fields": {
+        "label": "Product Recommendations"
+      }
+    }
+  ]

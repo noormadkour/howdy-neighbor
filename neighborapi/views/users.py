@@ -25,7 +25,7 @@ class NeighborSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Neighbor
-        fields = ("id", "user", "active", "profile_image_url", "bio")
+        fields = ("id", "user", "active", "profile_image", "bio")
 
 
 class UserViewSet(viewsets.ViewSet):
