@@ -10,6 +10,7 @@ router.register(r"posts", PostViewSet, "post")
 router.register(r"categories", CategoryViewSet, "category")
 router.register(r"posttypes", PostTypeViewSet, "posttype")
 router.register(r"comments", CommentViewSet, "comment")
+router.register(r"users", UserViewSet, "user")
 
 
 

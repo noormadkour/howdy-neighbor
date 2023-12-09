@@ -25,7 +25,7 @@ class NeighborSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Neighbor
-        fields = ("id", "user", "active", "profile_image", "bio")
+        fields = ("id", "user", "active", "profile_image", "bio", "address")
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -51,7 +51,16 @@ class UserViewSet(viewsets.ViewSet):
                 address=request.data.get("address")
             )
             token, created = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_201_CREATED)
+            data = {
+                'valid': True,
+                'token': token,
+                'user_id': user.id,
+                'neighbor_id': neighbor.id,
+                'admin': user.is_superuser,
+                'name': user.first_name
+            }
+            # return Response({"token": token.key}, status=status.HTTP_201_CREATED)
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=["post"], url_path="login")
@@ -63,8 +72,27 @@ class UserViewSet(viewsets.ViewSet):
 
         if user:
             token = Token.objects.get(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
+            neighbor = Neighbor.objects.get(user=user)
+            data = {
+                'valid': True,
+                'token': token.key,
+                'user_id': user.id,
+                'neighbor_id': neighbor.id,
+                'admin': user.is_superuser,
+                'name': user.first_name
+            }
+            # return Response({"token": token.key}, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_200_OK)
         else:
             return Response(
                 {"error": "Invalid Credentials"}, status=status.HTTP_400_BAD_REQUEST
             )
+
+    def retrieve(self, request, pk=None):
+        try:
+            neighbor = Neighbor.objects.get(pk=pk)
+            serialized = NeighborSerializer(neighbor)
+            return Response(serialized.data)
+
+        except Neighbor.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
