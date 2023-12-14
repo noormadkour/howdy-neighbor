@@ -17,6 +17,7 @@ class SimplePostSerializer(serializers.ModelSerializer):
             "post_type",
             "title",
             "image_url",
+            "event_date",
             "content",
             "approved",
             "categories",
@@ -46,6 +47,7 @@ class PostSerializer(serializers.ModelSerializer):
             "post_type",
             "title",
             "publication_date",
+            "event_date",
             "image_url",
             "content",
             "approved",
@@ -76,7 +78,7 @@ class PostViewSet(viewsets.ViewSet):
         post_type = PostType.objects.get(pk=request.data["post_type"])
         title = request.data.get("title")
         publication_date = request.data.get("publication_date")
-        event_date = request.dat.get("event_date")
+        event_date = request.data.get("event_date")
         image_url = request.data.get("image_url")
         content = request.data.get("content")
         approved = request.data.get("approved")
@@ -99,7 +101,7 @@ class PostViewSet(viewsets.ViewSet):
 
         # Establish the many-to-many relationships
         category_ids = request.data.get("categories", [])
-        post.tags.set(category_ids)
+        post.categories.set(category_ids)
 
         serializer = PostSerializer(post, context={"request": request})
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -115,6 +117,7 @@ class PostViewSet(viewsets.ViewSet):
             if serializer.is_valid():
                 post.post_type = serializer.validated_data["post_type"]
                 post.title = serializer.validated_data["title"]
+                post.event_date = serializer.validated_data["event_date"]
                 post.image_url = serializer.validated_data["image_url"]
                 post.content = serializer.validated_data["content"]
                 post.approved = serializer.validated_data["approved"]

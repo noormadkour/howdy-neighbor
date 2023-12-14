@@ -9,23 +9,23 @@ from neighborapi.models import Neighbor
 
 
 
-class UserSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
-    def get_full_name(self, obj):
-        return f'{obj.first_name} {obj.last_name}'
+class UserSerializer(serializers.ModelSerializer):   
 
     class Meta:
         model = User
-        fields = ["id", "username", "password", "first_name", "last_name", "email", "full_name"]
+        fields = ["id", "username", "password", "first_name", "last_name", "email",]
         extra_kwargs = {"password": {"write_only": True}}
 
 
 class NeighborSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    full_name = serializers.SerializerMethodField()
+    def get_full_name(self, obj):
+        return f'{obj.user.first_name} {obj.user.last_name}'
 
     class Meta:
         model = Neighbor
-        fields = ("id", "user", "active", "profile_image", "bio", "address")
+        fields = ("id", "user", "active", "profile_image", "bio", "address", "full_name")
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -53,7 +53,7 @@ class UserViewSet(viewsets.ViewSet):
             token, created = Token.objects.get_or_create(user=user)
             data = {
                 'valid': True,
-                'token': token,
+                'token': token.key,
                 'user_id': user.id,
                 'neighbor_id': neighbor.id,
                 'admin': user.is_superuser,
@@ -77,6 +77,7 @@ class UserViewSet(viewsets.ViewSet):
                 'valid': True,
                 'token': token.key,
                 'user_id': user.id,
+                # user image
                 'neighbor_id': neighbor.id,
                 'admin': user.is_superuser,
                 'name': user.first_name
