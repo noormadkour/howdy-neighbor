@@ -124,7 +124,7 @@ class PostViewSet(viewsets.ViewSet):
                 post.save()
 
                 category_ids = request.data.get("categories", [])
-                post.tags.set(category_ids)
+                post.categories.set(category_ids)
 
                 serializer = PostSerializer(post, context={"request": request})
                 return Response(None, status.HTTP_204_NO_CONTENT)
