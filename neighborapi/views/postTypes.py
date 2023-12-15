@@ -47,7 +47,7 @@ class PostTypeViewSet(viewsets.ViewSet):
 
             serializer = PostTypeSerializer(data=request.data)
             if serializer.is_valid():
-                post_type.label = serializer.validated_data["label"]
+                post_type.type = serializer.validated_data["type"]
                 # post_type.created_on = serializer.validated_data["created_on"]
                 post_type.save()
 
